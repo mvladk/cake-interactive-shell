@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+LIB=$(cd -P -- "$(dirname -- "$0")" && pwd -P) && LIB=$LIB/$(basename -- "$0")
+
+while [ -h "$LIB" ]; do
+    DIR=$(dirname -- "$LIB")
+    SYM=$(readlink "$LIB")
+    LIB=$(cd "$DIR" && cd $(dirname -- "$SYM") && pwd)/$(basename -- "$SYM")
+done
+
+LIB=$(dirname -- "$LIB")/
+
+command_exists () {
+    type "$1" &> /dev/null ;
+}
+
+if command_exists phpsh ; then
+    exec phpsh "$LIB"cpi.php "$@"
+else
+	echo "phpsh is not installed, fallbacking to native interactive shell"
+	echo "To bootstrap CakePHP use the following line: include('$LIB""cpi.php');"
+	exec php -a
+fi
+
+exit;

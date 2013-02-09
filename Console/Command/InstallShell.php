@@ -15,7 +15,7 @@ class InstallShell extends AppShell {
  **/
 	public function main() {
 		if (empty($this->params['no-classpath'])) {
-			$this->dispatchShell('CakeInterpreter.ClassPath --absolute');
+			$this->dispatchShell('Interpreter.ClassPath --absolute');
 		}
 		if (!is_dir(APP . 'Console' . DS)) {
 			mkdir(APP . 'Console' . DS);

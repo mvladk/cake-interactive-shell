@@ -15,7 +15,7 @@ class InstallShell extends AppShell {
  **/
 	public function main() {
 		if (empty($this->params['no-classpath'])) {
-			$this->dispatchShell('Interpreter.ClassPath --absolute');
+			$this->dispatchShell('Interactive.ClassPath --absolute');
 		}
 		if (!is_dir(APP . 'Console' . DS)) {
 			mkdir(APP . 'Console' . DS);
